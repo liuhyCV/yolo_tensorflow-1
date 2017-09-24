@@ -1,12 +1,12 @@
+import os
 import tensorflow as tf
 import datetime
-import os
+
 import argparse
 import yolo.config as cfg
 from yolo.yolo_net import YOLONet
 from utils.timer import Timer
 from utils.pascal_voc import pascal_voc
-
 
 class Solver(object):
 
@@ -63,7 +63,7 @@ class Solver(object):
         train_timer = Timer()
         load_timer = Timer()
 
-        for step in xrange(1, self.max_iter + 1):
+        for step in range(1, self.max_iter + 1):
 
             load_timer.tic()
             images, labels = self.data.get()
@@ -139,7 +139,7 @@ def main():
     parser.add_argument('--data_dir', default="data", type=str)
     parser.add_argument('--threshold', default=0.2, type=float)
     parser.add_argument('--iou_threshold', default=0.5, type=float)
-    parser.add_argument('--gpu', default='', type=str)
+    parser.add_argument('--gpu', default='0', type=str)
     args = parser.parse_args()
 
     if args.gpu is not None:

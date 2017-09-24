@@ -27,7 +27,7 @@ class Detector(object):
         self.sess = tf.Session()
         self.sess.run(tf.global_variables_initializer())
 
-        print 'Restoring weights from: ' + self.weights_file
+        print('Restoring weights from: ' + self.weights_file)
         self.saver = tf.train.Saver()
         self.saver.restore(self.sess, self.weights_file)
 
@@ -158,6 +158,8 @@ class Detector(object):
         detect_timer.toc()
         print('Average detecting time: {:.3f}s'.format(detect_timer.average_time))
 
+        print(result)
+
         self.draw_result(image, result)
         cv2.imshow('Image', image)
         cv2.waitKey(wait)
@@ -165,10 +167,10 @@ class Detector(object):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', default="YOLO_small.ckpt", type=str)
-    parser.add_argument('--weight_dir', default='weights', type=str)
-    parser.add_argument('--data_dir', default="data", type=str)
-    parser.add_argument('--gpu', default='', type=str)
+    parser.add_argument('--weights', default="save.ckpt-14000", type=str)
+    parser.add_argument('--weight_dir', default='output/2017_09_23_09_50', type=str)
+    parser.add_argument('--data_dir', default="data/pascal_voc", type=str)
+    parser.add_argument('--gpu', default='1', type=str)
     args = parser.parse_args()
 
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
@@ -182,7 +184,7 @@ def main():
     # detector.camera_detector(cap)
 
     # detect from image file
-    imname = 'test/person.jpg'
+    imname = 'test/cat.jpg'
     detector.image_detector(imname)
 
 
